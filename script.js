@@ -4,8 +4,6 @@
 
 /*
    THIS IS THE PIN ENE WILL ENTER.
-
-   Change 100726 to whatever PIN you want.
 */
 
 const correctPin = "100726";
@@ -139,18 +137,11 @@ function unlockWebsite() {
 
     pinScreen.style.opacity = "0";
 
-
     setTimeout(() => {
 
         pinScreen.style.display = "none";
 
         website.classList.remove("hidden");
-
-
-        /*
-           Start background music after
-           the user has interacted with the PIN.
-        */
 
         music.volume = 0.45;
 
@@ -161,7 +152,6 @@ function unlockWebsite() {
             );
 
         });
-
 
         showPage(1);
 
@@ -178,7 +168,6 @@ function showPage(pageNumberToShow) {
 
     const pages =
         document.querySelectorAll(".page");
-
 
     pages.forEach(page => {
 
@@ -209,39 +198,18 @@ function showPage(pageNumberToShow) {
         + String(totalPages).padStart(2, "0");
 
 
-    /* =================================================
-       VIDEO + BACKGROUND MUSIC
-    ================================================= */
+    /*
+       If we leave the video page,
+       stop the video.
+    */
 
     if (birthdayVideo && currentPage !== 4) {
-
-        /*
-           Stop the video when leaving
-           the video page.
-        */
 
         birthdayVideo.pause();
 
         birthdayVideo.muted = false;
 
         birthdayVideo.volume = 1;
-
-
-        /*
-           Start the background music again.
-        */
-
-        if (music.paused) {
-
-            music.play().catch(() => {
-
-                console.log(
-                    "Music could not resume."
-                );
-
-            });
-
-        }
 
     }
 
@@ -253,6 +221,41 @@ function showPage(pageNumberToShow) {
 ===================================================== */
 
 function nextPage() {
+
+    /*
+       If we are leaving the video page,
+       this button press is a REAL user interaction.
+
+       Therefore the phone should allow us
+       to restart the background music here.
+    */
+
+    if (currentPage === 4) {
+
+        if (birthdayVideo) {
+
+            birthdayVideo.pause();
+
+        }
+
+
+        music.volume = 0.45;
+
+
+        music.play().then(() => {
+
+            musicButton.textContent = "♫";
+
+        }).catch(() => {
+
+            console.log(
+                "Music could not resume."
+            );
+
+        });
+
+    }
+
 
     if (currentPage < totalPages) {
 
@@ -271,15 +274,17 @@ function toggleMusic() {
 
     if (music.paused) {
 
-        music.play().catch(() => {
+        music.play().then(() => {
+
+            musicButton.textContent = "♫";
+
+        }).catch(() => {
 
             console.log(
                 "Music could not play."
             );
 
         });
-
-        musicButton.textContent = "♫";
 
     } else {
 
@@ -307,27 +312,30 @@ function restartWebsite() {
     }
 
 
-    /*
-       Make sure background music
-       continues from the current position.
-    */
-
-    if (music.paused) {
-
-        music.play().catch(() => {
-
-            console.log(
-                "Music could not resume."
-            );
-
-        });
-
-    }
-
-
     currentPage = 1;
 
     showPage(1);
+
+
+    /*
+       Restart music because the user
+       pressed the restart button.
+    */
+
+    music.volume = 0.45;
+
+    music.play().then(() => {
+
+        musicButton.textContent = "♫";
+
+    }).catch(() => {
+
+        console.log(
+            "Music could not resume."
+        );
+
+    });
+
 
     window.scrollTo(0, 0);
 
@@ -345,15 +353,13 @@ if (birthdayVideo) {
         function() {
 
             /*
-               Stop the background music
-               while the video is playing.
+               Stop background music when
+               the video starts.
             */
 
-            if (!music.paused) {
+            music.pause();
 
-                music.pause();
-
-            }
+            musicButton.textContent = "🔇";
 
         }
     );
@@ -368,21 +374,14 @@ if (birthdayVideo) {
         function() {
 
             /*
-               Start the background music again
-               when the video is paused.
+               DO NOT automatically start music here.
+
+               On phones, browsers may block this because
+               the pause event itself is not considered
+               a direct user interaction.
+
+               The Birthday Wishes button will restart it.
             */
-
-            if (music.paused) {
-
-                music.play().catch(() => {
-
-                    console.log(
-                        "Music could not resume."
-                    );
-
-                });
-
-            }
 
         }
     );
@@ -397,21 +396,12 @@ if (birthdayVideo) {
         function() {
 
             /*
-               Start the background music again
-               when the video finishes.
+               Do not automatically start music here
+               because mobile browsers can block it.
+
+               If she presses Birthday Wishes,
+               nextPage() will restart the music.
             */
-
-            if (music.paused) {
-
-                music.play().catch(() => {
-
-                    console.log(
-                        "Music could not resume."
-                    );
-
-                });
-
-            }
 
         }
     );
@@ -427,11 +417,6 @@ document.addEventListener(
     "keydown",
     function(event) {
 
-        /*
-           Numbers can be typed on the keyboard
-           while entering the PIN.
-        */
-
         if (
             pinScreen.style.display !== "none"
             &&
@@ -443,10 +428,6 @@ document.addEventListener(
         }
 
 
-        /*
-           Backspace deletes a PIN number.
-        */
-
         if (
             pinScreen.style.display !== "none"
             &&
@@ -457,10 +438,6 @@ document.addEventListener(
 
         }
 
-
-        /*
-           Enter checks the PIN.
-        */
 
         if (
             pinScreen.style.display !== "none"
