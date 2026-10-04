@@ -349,20 +349,17 @@ function restartWebsite() {
 if (birthdayVideo) {
 
     birthdayVideo.addEventListener(
-        "play",
-        function() {
+    "play",
+    function() {
 
-            /*
-               Stop background music when
-               the video starts.
-            */
+        /*
+           Keep background music playing
+           when the video starts.
+        */
 
-            music.pause();
-
-            musicButton.textContent = "🔇";
-
-        }
-    );
+    }
+);
+    ;
 
 
     /* =================================================
