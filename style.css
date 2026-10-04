@@ -1,0 +1,1182 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    background: #130817;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.hidden {
+    display: none !important;
+}
+
+button {
+    font-family: "Poppins", sans-serif;
+}
+
+
+/* =====================================================
+   PIN SCREEN
+===================================================== */
+
+.pin-screen {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(126, 43, 145, 0.55),
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(77, 31, 103, 0.5),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #100617,
+            #27102f,
+            #100617
+        );
+
+    transition: opacity 0.8s ease;
+}
+
+
+.pin-screen::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.75) 1px,
+            transparent 1px
+        );
+
+    background-size: 90px 90px;
+
+    opacity: 0.12;
+}
+
+
+.pin-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(90%, 400px);
+
+    text-align: center;
+}
+
+
+.small-script {
+    font-family: "Cormorant Garamond", serif;
+
+    color: #e9a4df;
+
+    font-size: 17px;
+
+    font-style: italic;
+
+    margin-bottom: 8px;
+}
+
+
+.pin-content h1 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(48px, 12vw, 70px);
+
+    font-weight: 400;
+
+    line-height: 0.95;
+
+    margin-bottom: 15px;
+}
+
+
+.pin-content h1 span {
+    color: #eaa3e0;
+}
+
+
+.pin-subtitle {
+    color: rgba(255,255,255,0.55);
+
+    font-size: 12px;
+
+    margin-bottom: 25px;
+}
+
+
+.pin-dots {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 11px;
+
+    margin-bottom: 24px;
+}
+
+
+.pin-dots span {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,0.4);
+
+    background: transparent;
+
+    transition: 0.2s;
+}
+
+
+.pin-dots span.filled {
+    background: #ed9bdd;
+
+    border-color: #ed9bdd;
+
+    box-shadow: 0 0 12px rgba(237,155,221,0.8);
+}
+
+
+.keypad {
+    width: min(280px, 80vw);
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 9px;
+}
+
+
+.keypad button {
+    height: 57px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 13px;
+
+    background: rgba(122, 65, 137, 0.3);
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.keypad button:hover {
+    background: rgba(190, 102, 190, 0.4);
+}
+
+
+.keypad button:active {
+    transform: scale(0.92);
+}
+
+
+.keypad .special {
+    color: #eca8e1;
+
+    font-size: 21px;
+}
+
+
+.hint {
+    margin-top: 21px;
+
+    font-size: 11px;
+
+    color: rgba(255,255,255,0.45);
+}
+
+
+.hint span {
+    color: #e9a0da;
+}
+
+
+#pinError {
+    min-height: 18px;
+
+    margin-top: 7px;
+
+    color: #f5a4c2;
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   WEBSITE / PAGES
+===================================================== */
+
+.website {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #130817;
+}
+
+
+.page {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: scale(1.03);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease,
+        visibility 0.7s;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(111, 55, 121, 0.4),
+            transparent 38%
+        ),
+        linear-gradient(
+            145deg,
+            #100617,
+            #27132b,
+            #130817
+        );
+}
+
+
+.page.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: scale(1);
+}
+
+
+/* stars */
+
+.page-stars,
+.stars {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.8) 0.8px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.45) 0.7px,
+            transparent 1px
+        );
+
+    background-size:
+        100px 100px,
+        170px 170px;
+
+    background-position:
+        0 0,
+        35px 70px;
+
+    opacity: 0.4;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.pink-button {
+
+    position: relative;
+    z-index: 5;
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    background:
+        linear-gradient(
+            135deg,
+            #d66ca5,
+            #e889ad
+        );
+
+    color: white;
+
+    padding: 12px 24px;
+
+    border-radius: 30px;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(205,91,158,0.2);
+
+    transition: 0.3s;
+}
+
+
+.pink-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 14px 35px rgba(205,91,158,0.35);
+}
+
+
+.pink-button:active {
+    transform: scale(0.96);
+}
+
+
+.small-button {
+    margin-top: 20px;
+}
+
+
+.outline-button {
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    background: transparent;
+
+    color: rgba(255,255,255,0.75);
+
+    padding: 10px 20px;
+
+    border-radius: 25px;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.outline-button:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+
+/* =====================================================
+   PAGE 1 — HERO
+===================================================== */
+
+.hero-center {
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(90%, 650px);
+
+    text-align: center;
+
+    z-index: 4;
+}
+
+
+.eyebrow {
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    color: rgba(244,184,229,0.8);
+
+    margin-bottom: 13px;
+}
+
+
+.hero-center h1 {
+
+    font-family: "DM Serif Display", serif;
+
+    font-weight: 400;
+
+    font-size: clamp(54px, 10vw, 95px);
+
+    line-height: 0.9;
+
+    text-shadow:
+        0 4px 30px rgba(0,0,0,0.25);
+}
+
+
+.hero-center h1 span {
+
+    display: block;
+
+    color: #f0b0df;
+}
+
+
+.created {
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-style: italic;
+
+    color: rgba(255,255,255,0.6);
+
+    margin: 18px 0 27px;
+
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   POLAROIDS
+===================================================== */
+
+.polaroid {
+
+    position: absolute;
+
+    z-index: 2;
+
+    width: 105px;
+
+    padding: 8px 8px 25px;
+
+    background: #f2eee9;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.35);
+
+    transition: 0.4s;
+}
+
+
+.polaroid img {
+
+    width: 100%;
+
+    height: 105px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+.p1 {
+    left: 7%;
+    top: 15%;
+    transform: rotate(-10deg);
+}
+
+
+.p2 {
+    right: 8%;
+    top: 14%;
+    transform: rotate(9deg);
+}
+
+
+.p3 {
+    left: 9%;
+    bottom: 13%;
+    transform: rotate(7deg);
+}
+
+
+.p4 {
+    right: 9%;
+    bottom: 12%;
+    transform: rotate(-9deg);
+}
+
+
+/* =====================================================
+   PAGE 2 — LETTER
+===================================================== */
+
+.letter-wrapper {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 35px 20px;
+
+    text-align: center;
+
+    overflow-y: auto;
+}
+
+
+.letter-wrapper h2 {
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(42px, 7vw, 65px);
+
+    font-weight: 400;
+
+    margin-bottom: 20px;
+}
+
+
+.letter-card {
+
+    width: min(680px, 88vw);
+
+    max-height: 62vh;
+
+    overflow-y: auto;
+
+    text-align: left;
+
+    padding: 27px 30px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(61, 47, 60, 0.68);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.25);
+
+    scrollbar-width: thin;
+}
+
+
+.letter-card p {
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 16px;
+
+    line-height: 1.45;
+
+    color: rgba(255,255,255,0.84);
+
+    margin-bottom: 13px;
+}
+
+
+.letter-card .letter-title {
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    color: #f0b1df;
+
+    margin-bottom: 18px;
+}
+
+
+/* =====================================================
+   PAGE 3 — GALLERY
+===================================================== */
+
+.gallery-wrapper {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    text-align: center;
+}
+
+
+.gallery-title {
+
+    margin-bottom: 17px;
+}
+
+
+.gallery-title h2 {
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(40px, 6vw, 60px);
+
+    font-weight: 400;
+}
+
+
+.gallery {
+
+    width: min(850px, 90vw);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+.gallery-photo {
+
+    background: #eee9e5;
+
+    padding: 7px;
+
+    box-shadow:
+        0 12px 25px rgba(0,0,0,0.35);
+
+    transition: 0.3s;
+}
+
+
+.gallery-photo:hover {
+
+    transform:
+        translateY(-5px)
+        rotate(0deg) !important;
+}
+
+
+.gallery-photo img {
+
+    width: 100%;
+
+    height: 150px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+.photo-a {
+    transform: rotate(-3deg);
+}
+
+
+.photo-b {
+    transform: rotate(2deg);
+}
+
+
+.photo-c {
+    transform: rotate(-1deg);
+}
+
+
+.photo-d {
+    transform: rotate(3deg);
+}
+
+
+.photo-e {
+    transform: rotate(2deg);
+}
+
+
+.photo-f {
+    transform: rotate(-3deg);
+}
+
+
+/* =====================================================
+   PAGE 4 — VIDEO
+===================================================== */
+
+.video-wrapper {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px 20px;
+
+    text-align: center;
+}
+
+
+.video-wrapper h2 {
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(42px, 7vw, 67px);
+
+    font-weight: 400;
+
+    line-height: 1;
+}
+
+
+.video-subtitle {
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-style: italic;
+
+    color: rgba(255,255,255,0.6);
+
+    margin: 8px 0 20px;
+}
+
+
+.video-container {
+
+    width: min(720px, 88vw);
+
+    padding: 8px;
+
+    background:
+        rgba(50,35,51,0.7);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    border-radius: 7px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.45);
+
+    margin-bottom: 18px;
+}
+
+
+.video-container video {
+
+    width: 100%;
+
+    max-height: 52vh;
+
+    display: block;
+
+    border-radius: 4px;
+
+    background: black;
+}
+
+
+/* =====================================================
+   PAGE 5 — WISHES
+===================================================== */
+
+.wishes-wrapper {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    text-align: center;
+}
+
+
+.wishes-wrapper h2 {
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(44px, 7vw, 70px);
+
+    font-weight: 400;
+
+    margin-bottom: 25px;
+}
+
+
+.wish-card {
+
+    width: min(650px, 88vw);
+
+    padding: 35px;
+
+    border-radius: 9px;
+
+    background:
+        rgba(62,47,61,0.65);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.25);
+}
+
+
+.wish-card p {
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 20px;
+
+    line-height: 1.5;
+
+    color: rgba(255,255,255,0.82);
+
+    margin-bottom: 18px;
+}
+
+
+.wish-card .wish-ending {
+
+    color: #f0a9dc;
+
+    font-size: 25px;
+
+    margin-top: 25px;
+}
+
+
+/* =====================================================
+   PAGE 6 — FINAL
+===================================================== */
+
+.final-page {
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(125,61,132,0.65),
+            transparent 42%
+        ),
+        linear-gradient(
+            145deg,
+            #120719,
+            #321632,
+            #16091c
+        );
+}
+
+
+.final-content {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+
+.final-content h2 {
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(55px, 10vw, 100px);
+
+    font-weight: 400;
+
+    line-height: 0.95;
+}
+
+
+.final-content h2 span {
+
+    color: #eca5da;
+}
+
+
+.final-text {
+
+    width: min(500px, 85vw);
+
+    margin-top: 25px;
+
+    color: rgba(255,255,255,0.65);
+
+    line-height: 1.7;
+
+    font-size: 13px;
+}
+
+
+.forever {
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 22px;
+
+    font-style: italic;
+
+    color: #efa7dd;
+
+    margin: 20px 0 30px;
+}
+
+
+/* =====================================================
+   MUSIC BUTTON
+===================================================== */
+
+.music-button {
+
+    position: fixed;
+
+    z-index: 100;
+
+    right: 20px;
+
+    bottom: 20px;
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    background: rgba(76,40,78,0.7);
+
+    color: white;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(5px);
+}
+
+
+/* =====================================================
+   PAGE NUMBER
+===================================================== */
+
+.page-number {
+
+    position: fixed;
+
+    z-index: 100;
+
+    right: 20px;
+
+    bottom: 67px;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: rgba(255,255,255,0.4);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .polaroid {
+
+        width: 72px;
+
+        padding: 5px 5px 16px;
+    }
+
+
+    .polaroid img {
+
+        height: 72px;
+    }
+
+
+    .p1 {
+        left: 4%;
+        top: 12%;
+    }
+
+    .p2 {
+        right: 4%;
+        top: 12%;
+    }
+
+    .p3 {
+        left: 4%;
+        bottom: 11%;
+    }
+
+    .p4 {
+        right: 4%;
+        bottom: 11%;
+    }
+
+
+    .hero-center {
+        width: 86%;
+    }
+
+
+    .hero-center h1 {
+        font-size: 55px;
+    }
+
+
+    .letter-card {
+
+        max-height: 55vh;
+
+        padding: 22px;
+
+    }
+
+
+    .letter-card p {
+
+        font-size: 15px;
+
+    }
+
+
+    .gallery {
+
+        width: 94vw;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 6px;
+    }
+
+
+    .gallery-photo {
+
+        padding: 4px;
+
+    }
+
+
+    .gallery-photo img {
+
+        height: 115px;
+
+    }
+
+
+    .video-container {
+
+        width: 94vw;
+
+    }
+
+
+    .wish-card {
+
+        padding: 25px 20px;
+
+    }
+
+
+    .wish-card p {
+
+        font-size: 18px;
+
+    }
+
+}

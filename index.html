@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For Ene ♡</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Serif+Display&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         PASSWORD / PIN SCREEN
+    ====================================================== -->
+
+    <section id="pinScreen" class="screen pin-screen">
+
+        <div class="stars"></div>
+
+        <div class="pin-content">
+
+            <div class="small-script">
+                A little surprise for you ♡
+            </div>
+
+            <h1>
+                For You,
+                <span>Baby</span>
+            </h1>
+
+            <p class="pin-subtitle">
+                Enter the secret pin to continue
+            </p>
+
+            <div class="pin-dots" id="pinDots">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="keypad">
+
+                <button onclick="addNumber('1')">1</button>
+                <button onclick="addNumber('2')">2</button>
+                <button onclick="addNumber('3')">3</button>
+
+                <button onclick="addNumber('4')">4</button>
+                <button onclick="addNumber('5')">5</button>
+                <button onclick="addNumber('6')">6</button>
+
+                <button onclick="addNumber('7')">7</button>
+                <button onclick="addNumber('8')">8</button>
+                <button onclick="addNumber('9')">9</button>
+
+                <button onclick="deleteNumber()" class="special">
+                    ←
+                </button>
+
+                <button onclick="addNumber('0')">0</button>
+
+                <button onclick="checkPin()" class="special">
+                    ✓
+                </button>
+
+            </div>
+
+            <p class="hint">
+                Hint: <span>the day we first started talking ♡</span>
+            </p>
+
+            <p id="pinError"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MAIN WEBSITE
+         EVERY .page IS A SEPARATE SCREEN
+    ====================================================== -->
+
+    <main id="website" class="website hidden">
+
+
+        <!-- =================================================
+             PAGE 1 — YOUR SPECIAL DAY
+        ================================================== -->
+
+        <section class="page active" id="page1">
+
+            <div class="page-stars"></div>
+
+            <!-- Polaroid decorations -->
+
+            <div class="polaroid p1">
+                <img src="images/photo1.jpg">
+            </div>
+
+            <div class="polaroid p2">
+                <img src="images/photo2.jpg">
+            </div>
+
+            <div class="polaroid p3">
+                <img src="images/photo3.jpg">
+            </div>
+
+            <div class="polaroid p4">
+                <img src="images/photo4.jpg">
+            </div>
+
+
+            <div class="hero-center">
+
+                <p class="eyebrow">
+                    A LOVE LETTER FOR YOU ♡
+                </p>
+
+                <h1>
+                    Your
+                    <span>Special Day</span>
+                </h1>
+
+                <p class="created">
+                    Created with love, just for you
+                </p>
+
+                <button
+                    class="pink-button"
+                    onclick="nextPage()"
+                >
+                    READ MY LETTER
+                    <span>♡</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PAGE 2 — HAPPY BIRTHDAY LETTER
+        ================================================== -->
+
+        <section class="page" id="page2">
+
+            <div class="page-stars"></div>
+
+            <div class="letter-wrapper">
+
+                <h2>
+                    Happy Birthday
+                </h2>
+
+                <div class="letter-card">
+
+    <p class="letter-title">
+        HAPPY BIRTHDAY ENE ❤️
+    </p>
+
+    <p>
+        Happy birthday, Ene. ❤️
+    </p>
+
+    <p>
+        I honestly don’t even know where to start because there’s so much I want to say to you, and somehow I still feel like words won’t be enough.
+    </p>
+
+    <p>
+        It’s crazy to think that I’ve only known you for about three months. Three months really isn’t that long, but somehow, in those three months, I’ve gotten to know you in ways I never expected to. I’ve opened up to you about things I’ve never been able to tell other people, and I think that says so much about how comfortable and safe I became with you. You became someone I could talk to without feeling like I had to hide parts of myself, and I’ll always be grateful for that.
+    </p>
+
+    <p>
+        Even though I haven’t known you for very long, I know one thing for sure: I don’t want it to be anyone else. I want it to be you. I want to keep learning you, understanding you, and seeing all the different sides of you that I haven’t gotten to see yet. I want you to know me just as deeply too, even the parts of me that I don’t always know how to explain.
+    </p>
+
+    <p>
+        I love the little things about being with you. I love your hugs, your hands, your hair, your smile, your presence, and just being close to you. I want to keep making memories with you and keep having those little moments that eventually become memories we look back on and smile about.
+    </p>
+
+    <p>
+        I genuinely want a future with you. I know we haven’t known each other for years, and I know there’s still so much we have to learn about each other, but that doesn’t make what I feel any less real to me. If anything, it makes me excited to see what’s still waiting for us. I want to know you more and more. I want to see the sides of you that you don’t show everyone. I want you to feel like you can be completely yourself around me, and I want to be able to do the same with you.
+    </p>
+
+    <p>
+        And Ene, I genuinely think you’re one of the most beautiful people I’ve ever met. Not just because of how beautiful you are on the outside, but because of the heart you have. You have such a tender heart, and I hope you always know how precious that is. I never want to be someone who makes you regret trusting me. I want you to feel safe with me. I want you to trust me with your heart the way I trust you with mine.
+    </p>
+
+    <p>
+        I want so many good things for you. I want you to be happy. I want you to experience the things you dream about, to be surrounded by people who genuinely love and appreciate you, and to always have reasons to smile. Even when things aren’t perfect, I hope you remember that there is someone who genuinely wants the best for you and is always rooting for you.
+    </p>
+
+    <p>
+        I’m so grateful that somehow, out of all the people I could have met, I met you. And even though it’s only been three months, you’ve already become such a special part of my life.
+    </p>
+
+    <p>
+        I love you so much, Ene. And on your birthday, more than anything, I just want you to have the most beautiful day. You deserve to feel loved, celebrated, appreciated, and happy today.
+    </p>
+
+    <p>
+        Happy birthday, my love. ❤️
+    </p>
+
+    <p>
+        Here’s to getting to know each other more, making more memories, growing together, and seeing where life takes us.
+    </p>
+
+    <p>
+        I love you. Always. ❤️
+    </p>
+    <p>
+                                    - Serena ❤️
+    </p>
+
+</div>
+
+                <button
+                    class="pink-button small-button"
+                    onclick="nextPage()"
+                >
+                    MORE MEMORIES
+                    <span>♡</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PAGE 3 — PHOTO MEMORIES
+        ================================================== -->
+
+        <section class="page" id="page3">
+
+            <div class="page-stars"></div>
+
+            <div class="gallery-wrapper">
+
+                <div class="gallery-title">
+                    <p class="eyebrow">
+                        LITTLE PIECES OF US
+                    </p>
+
+                    <h2>
+                        Memories ♡
+                    </h2>
+                </div>
+
+
+                <div class="gallery">
+
+                    <div class="gallery-photo photo-a">
+                        <img src="images/photo1.jpg">
+                    </div>
+
+                    <div class="gallery-photo photo-b">
+                        <img src="images/photo2.jpg">
+                    </div>
+
+                    <div class="gallery-photo photo-c">
+                        <img src="images/photo3.jpg">
+                    </div>
+
+                    <div class="gallery-photo photo-d">
+                        <img src="images/photo4.jpg">
+                    </div>
+
+                    <div class="gallery-photo photo-e">
+                        <img src="images/photo5.jpg">
+                    </div>
+
+                    <div class="gallery-photo photo-f">
+                        <img src="images/photo6.jpg">
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="pink-button"
+                    onclick="nextPage()"
+                >
+                    WATCH THIS ♡
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PAGE 4 — VIDEO
+        ================================================== -->
+
+        <section class="page" id="page4">
+
+            <div class="page-stars"></div>
+
+            <div class="video-wrapper">
+
+                <p class="eyebrow">
+                    ✦ A SPECIAL VIDEO MESSAGE ✦
+                </p>
+
+                <h2>
+                    A Moment For You
+                </h2>
+
+                <p class="video-subtitle">
+                    just a little memory ♡
+                </p>
+
+
+                <div class="video-container">
+
+                    <video
+                        id="birthdayVideo"
+                        controls
+                        playsinline
+                        preload="auto"
+
+                    >
+
+                        <source
+                            src="videos/video1.mp4"
+                            type="video/mp4
+                            "
+                        >
+
+                        Your browser does not support video.
+
+                    </video>
+
+                </div>
+
+
+                <button
+                    class="pink-button"
+                    onclick="nextPage()"
+                >
+                    BIRTHDAY WISHES
+                    <span>♡</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PAGE 5 — BIRTHDAY WISHES
+        ================================================== -->
+
+        <section class="page" id="page5">
+
+            <div class="page-stars"></div>
+
+            <div class="wishes-wrapper">
+
+                <p class="eyebrow">
+                    ✦ JUST FOR YOU ✦
+                </p>
+
+                <h2>
+                    Birthday Wishes
+                </h2>
+
+                <div class="wish-card">
+
+                    <p>
+                        I hope this new year of your life brings
+                        you beautiful things.
+                    </p>
+
+                    <p>
+                        I hope you laugh more, smile more,
+                        experience more happiness and always
+                        remember how loved you are.
+                    </p>
+
+                    <p>
+                        You deserve beautiful memories,
+                        beautiful moments and people who remind
+                        you just how special you are and i hope to have 
+                        many more beautiful memories with you my love.
+                    </p>
+
+                    <p class="wish-ending">
+                        Happy Birthday,I love you so much Baby ♡
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="pink-button"
+                    onclick="nextPage()"
+                >
+                    ONE LAST THING...
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PAGE 6 — FINAL PAGE
+        ================================================== -->
+
+        <section class="page final-page" id="page6">
+
+            <div class="page-stars"></div>
+
+            <div class="final-content">
+
+                <p class="eyebrow">
+                    WITH ALL MY LOVE
+                </p>
+
+                <h2>
+                    Happy Birthday,
+                    <span>Baby</span>
+                </h2>
+
+                <p class="final-text">
+                    Thank you for being part of my life.
+                    I hope you always remember how special
+                    you are to me.
+                </p>
+
+                <p class="forever">
+                    Forever yours. ♡
+        
+                </p>
+
+
+                <button
+                    class="outline-button"
+                    onclick="restartWebsite()"
+                >
+                    REPLAY FROM START
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- MUSIC CONTROL -->
+         <audio id="backgroundMusic" loop>
+    <source src="music/background.mp3" type="audio/mpeg">
+</audio>
+
+        <button
+            id="musicButton"
+            class="music-button"
+            onclick="toggleMusic()"
+        >
+            ♫
+        </button>
+
+        <!-- PAGE COUNTER -->
+
+        <div class="page-number" id="pageNumber">
+            01 / 06
+        </div>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
