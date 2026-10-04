@@ -196,10 +196,12 @@ function showPage(pageNumberToShow) {
     */
 
     const video =
-        document.getElementById("birthdayVideo");
-    birthdayVideo.muted = false;
-    birthdayVideo.volume = 1;
+    document.getElementById("birthdayVideo");
 
+    if (video) {
+        video.muted = false;
+        video.volume = 1;
+    }
 
     if (currentPage !== 4 && video) {
 
@@ -323,3 +325,151 @@ document.addEventListener(
 
     }
 );
+/* =====================================================
+   VIDEO + BACKGROUND MUSIC MIXING
+===================================================== */
+
+const birthdayVideo =
+    document.getElementById("birthdayVideo");
+
+let audioContext = null;
+let musicSource = null;
+let videoSource = null;
+let musicGain = null;
+let videoGain = null;
+
+
+/* =====================================================
+   SET UP AUDIO MIXER
+===================================================== */
+
+function setupAudioMixer() {
+
+    if (!music || !birthdayVideo) {
+        return;
+    }
+
+    // Only create the audio system once
+    if (audioContext) {
+        return;
+    }
+
+    audioContext =
+        new (window.AudioContext ||
+        window.webkitAudioContext)();
+
+
+    // Background music
+    musicSource =
+        audioContext.createMediaElementSource(music);
+
+    musicGain =
+        audioContext.createGain();
+
+
+    // Birthday video
+    videoSource =
+        audioContext.createMediaElementSource(
+            birthdayVideo
+        );
+
+    videoGain =
+        audioContext.createGain();
+
+
+    // Normal volumes
+    musicGain.gain.value = 0.45;
+    videoGain.gain.value = 1.0;
+
+
+    // Connect background music
+    musicSource.connect(musicGain);
+    musicGain.connect(audioContext.destination);
+
+
+    // Connect video audio
+    videoSource.connect(videoGain);
+    videoGain.connect(audioContext.destination);
+}
+
+
+/* =====================================================
+   VIDEO STARTS
+===================================================== */
+
+if (birthdayVideo) {
+
+    birthdayVideo.addEventListener(
+        "play",
+        function() {
+
+            setupAudioMixer();
+
+            if (audioContext &&
+                audioContext.state === "suspended") {
+
+                audioContext.resume();
+
+            }
+
+
+            // Background music becomes quiet
+            if (musicGain) {
+
+                musicGain.gain.setTargetAtTime(
+                    0.10,
+                    audioContext.currentTime,
+                    0.05
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =================================================
+       VIDEO PAUSED
+    ================================================= */
+
+    birthdayVideo.addEventListener(
+        "pause",
+        function() {
+
+            if (musicGain && audioContext) {
+
+                musicGain.gain.setTargetAtTime(
+                    0.45,
+                    audioContext.currentTime,
+                    0.05
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =================================================
+       VIDEO ENDS
+    ================================================= */
+
+    birthdayVideo.addEventListener(
+        "ended",
+        function() {
+
+            if (musicGain && audioContext) {
+
+                musicGain.gain.setTargetAtTime(
+                    0.45,
+                    audioContext.currentTime,
+                    0.05
+                );
+
+            }
+
+        }
+    );
+
+}
+
